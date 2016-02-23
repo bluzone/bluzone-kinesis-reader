@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.bluvision.poc</groupId>
+	<artifactId>bluzone-kinesis-reader</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Bluzone Kinesis Reader</name>
+	<description>Kinesis Reader Example</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.1.RELEASE</version>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
+				<configuration>
+					<jvmArguments>
+						<!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8001 -->
+						-DAWS_SECRET_KEY=${my.aws.secret.key}
+						-DAWS_ACCESS_KEY_ID=${my.aws.access.key}
+						-DKINESIS_ENDPOINT=${my.kinesis.endpoint}
+						-DSTREAM_NAME=${my.kinesis.stream.name}
+					</jvmArguments>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>amazon-kinesis-client</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.9.16</version>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<start-class>com.bluvision.poc.kinesis.consumer.Application</start-class>
+		<spring.boot.version>1.3.1.RELEASE</spring.boot.version>
+		<spring.boot.websocket.version>1.3.1.RELEASE</spring.boot.websocket.version>
+		<my.aws.access.key>REPLACE_ME_WITH_AWS_ACCESS_KEY</my.aws.access.key>
+		<my.aws.secret.key>REPLACE_ME_WITH_AWS_SECRET_KEY</my.aws.secret.key>
+		<my.kinesis.endpoint>REPLACE_ME_WITH_KINESIS_ENDPOINT</my.kinesis.endpoint>
+		<my.kinesis.stream.name>REPLACE_ME_WITH_STREAM_NAME</my.kinesis.stream.name>
+	</properties>
+
+</project>

@@ -1,0 +1,23 @@
+---
+logging:
+  level:
+    com.bluvision: 'DEBUG'
+    org.springframework: 'OFF'
+
+info:
+  version: 1.0
+  name:  Kinesis Reader
+
+system:
+  config:
+    streamName: ${STREAM_NAME}
+
+# Shopper Track Test
+aws:
+  access:
+    key:
+      id: ${AWS_ACCESS_KEY_ID}
+  secret:
+    key: ${AWS_SECRET_KEY}
+  kinesis:
+    endpoint: ${KINESIS_ENDPOINT}
